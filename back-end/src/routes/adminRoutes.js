@@ -16,6 +16,8 @@ router.get('/questions', isAdmin, async (req, res) => {
   }
 });
 
+
+
 // Create a new test
 router.post('/create-test', isAdmin, async (req, res) => {
   try {
@@ -48,13 +50,20 @@ router.post('/create-question', isAdmin, async (req, res) => {
       return res.status(400).json({ error: 'Please provide question text, options (at least 2), and correctAnswer.' });
     }
 
+    // ✅ Enhanced validation: Ensure correctAnswer is one of the options
+    if (!options.includes(correctAnswer)) {
+      return res.status(400).json({ error: 'Correct answer must be one of the provided options.' });
+    }
+
     const question = new Question({ text, options, correctAnswer });
     await question.save();
+    
     res.status(201).json({ message: 'Question created', question });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // Assign test to students
 router.post('/assign-test/:testId', isAdmin, async (req, res) => {
@@ -104,14 +113,14 @@ router.get('/tests', isAdmin, async (req, res) => {
 
 
 // Get results of a test
-router.get('/results/:testId', isAdmin, async (req, res) => {
-  try {
-    const results = await Result.find({ testId: req.params.testId }).populate('studentId', 'name email');
-    res.json(results);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// router.get('/results/:testId', isAdmin, async (req, res) => {
+//   try {
+//     const results = await Result.find({ testId: req.params.testId }).populate('studentId', 'name email');
+//     res.json(results);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 router.get('/results/:testId', async (req, res) => {
   const { testId } = req.params;
