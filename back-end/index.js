@@ -14,11 +14,10 @@ const { protect } = require('./src/middleware/authMiddleware');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-const __dirname = path.resolve();
+// ✅ Do NOT redefine __dirname — it's built-in with CommonJS
+
 // Middleware
-
 app.use(cors({ origin: true, credentials: true }));
-
 app.use(express.json()); // parse incoming JSON
 
 // MongoDB connection
@@ -49,15 +48,13 @@ app.get('/testdb', async (req, res) => {
   }
 });
 
-
-
+// Static file serving in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../front-end/dist")));
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../front-end/dist/index.html"));
   });
 }
-
 
 // Start server
 app.listen(PORT, () => {
