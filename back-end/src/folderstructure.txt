@@ -1,0 +1,20 @@
+Project Folder Structure:
+
+📁 config
+  📄 db.js
+📁 controller
+  📄 adminController.js
+  📄 studentController.js
+📄 folderstructure.txt
+📁 middleware
+  📄 authMiddleware.js
+📁 models
+  📄 Questions.js
+  📄 Result.js
+  📄 Test.js
+  📄 User.js
+📁 routes
+  📄 adminRoutes.js
+  📄 authRoutes.js
+  📄 studentRoutes.js
+📄 structure.js

@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: exam-portal
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        value: mongodb+srv://muthumaranofficial2003:mJLUMbVfLEaNoM7z@cluster0.livcyx5.mongodb.net/exam-portal?retryWrites=true&w=majority&appName=Cluster0
+      - key: JWT_SECRET
+        value: Muthumaran@!@#333@#$$%$#^%$#
+      - key: NODE_ENV
+        value: production
