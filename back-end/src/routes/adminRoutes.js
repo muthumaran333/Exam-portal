@@ -3,7 +3,7 @@ const router = express.Router();
 const { isAdmin } = require('../middleware/authMiddleware');
 const Test = require('../models/Test');
 const Question = require('../models/Questions');
-const User = require('../models/user');
+const User = require('../models/User');
 const Result = require('../models/Result');
 
 // Get all questions
